@@ -1,40 +1,119 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="kr.or.ddit.rangers.service.RangersService"%>
 <%@page import="kr.or.ddit.rangers.model.RangerVo"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- jstlÀ» »ç¿ëÇÏ±â À§ÇÑ ÁØºñ : jsp µğ·ºÆ¼ºê(taglib)¸¦ ÀÌ¿ëÇÏ¿© »ç¿ëÇÏ°íÀÚ ÇÏ´Â ¶óÀÌºê·¯¸® ¼±¾ğ
-						   prefix = "ÀÓÀÇ·Î ÀÛ¼º °¡´ÉÇÏ³ª ÀÏ¹İÀûÀ¸·Î »ç¿ëÇÏ´Â ÀÌ¸§ ±ÇÀå ex) core : c , format : fmt , function : fn" / uri = "ÀÚµ¿¿Ï¼º±â´É"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+   jstlì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ ì¤€ë¹„ : jsp ë””ë ‰í‹°ë¸Œ(taglib)ë¥¼ ì´ìš©í•˜ì—¬ ì‚¬ìš©í•˜ê³ ì í•˜ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬ ì„ ì–¸
+                      prefix = "ì„ì˜ë¡œ ì‘ì„± ê°€ëŠ¥í•˜ë‚˜ ì¼ë°˜ì ìœ¼ë¡œ ì‚¬ìš©í•˜ëŠ” ì´ë¦„ ê¶Œì¥"
+                              core : c, format : fmt, function : fn
+                      uri = "ìë™ì™„ì„±ê¸°ëŠ¥"
  --%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<%-- url : localhost/jstl/core.jsp --%>
-<h2>core : set</h2>
-<%-- Æ¯Á¤ scope(page, request, session, application)¿¡ ¼Ó¼ºÀ» »ı¼º
-	 ±âº» scope : page
- --%>
- 
- <%-- pagecontext.setAttribute("userId", "brown"); 
- 	  session.setAttribute("userId", "brown");
- --%>
- 
- <%
- 	RangerVo rangerVo = new RangerVo("brown", "ºê¶ó¿î", 8);
- 	session.setAttribute("ranger", rangerVo);
- %>
-<c:set var="userId" value="brown" scope="session"/>
+<%-- http://localhost/jstl/core.jsp --%>
 
-userId(Ç¥Çö½Ä) : <%=pageContext.getAttribute("userId") %> <br>
-userId(Ç¥Çö½Ä-session) : <%=session.getAttribute("userId") %> <br>
+<h2>core - set</h2>
+<%-- 
+   íŠ¹ì • scope(page, request, session, application)ì— ì†ì„±ì„ ìƒì„±
+   ê¸°ë³¸ scope : page
+--%>
+
+<%--
+   pageContext.setAttribute("userId", "brown");
+   session.setAttribute("userId", "brown"); 
+--%>
+
+<%
+   RangerVo rangerVo = new RangerVo("brown", "ë¸Œë¼ìš´", 8);
+   session.setAttribute("ranger", rangerVo);
+%>
+<c:set var="userId" value="brown" scope="session" />
+
+userId(í‘œí˜„ì‹-page) : <%=pageContext.getAttribute("userId") %> <br>
+userId(í‘œí˜„ì‹-session) : <%=session.getAttribute("userId") %> <br>
 userId(el) : ${userId } <br>
-----------------------------<br>
+==================================================
+<c:set target="${ranger }" property="age" value="10"></c:set>
+ranger(ë‚˜ì´ ë³€ê²½) : ${ranger } <br>
 
-<c:set target="${ranger }" property="age" value="10" />
-ranger - ³ªÀÌ º¯°æ : ${ranger } <br>
+<%--
+   pageContext.setAttribute("test", new RangerVo("brown", "ë¸Œë¼ìš´", 15));
+--%>
+ê°ì²´ìƒì„± <c:set var="test" value="<%=new RangerVo(\"brown\", \"ë¸Œë¼ìš´\", 15) %>" />
+test : ${test } <br>
 
+<%--
+   pageContext.removeAttribute("test");
+--%>
+<c:remove var="test" />
+test : ${test } <br>
+
+<h2>core - if</h2>
+<%-- pageContextì— code ì†ì„± ì¶”ê°€ --%>
+<c:set var="code" value="01" />
+<c:if test="${code == '00' }">
+   <span>code : 00</span>
+</c:if>
+<c:if test="${code == '01' }">
+   <span>code : 01</span>
+</c:if>
+
+<h2>core - choose</h2>
+<%-- request.setAttribute("code", "03") --%>
+<c:remove var="code" />
+<c:set var="code" value="03" scope="request"/>
+<c:choose>
+   <c:when test="${code == '00' }">codeê°€ ${code} / 00 ì…ë‹ˆë‹¤</c:when>
+   <c:when test="${code == '01' }">codeê°€ ${code} / 01 ì…ë‹ˆë‹¤</c:when>
+   <c:when test="${code == '02' }">codeê°€ ${code} / 02 ì…ë‹ˆë‹¤</c:when>
+   <c:when test="${code == '03' }">codeê°€ ${code} / 03 ì…ë‹ˆë‹¤</c:when>
+   <c:when test="${code == '04' }">codeê°€ ${code} / 04 ì…ë‹ˆë‹¤</c:when>
+   <c:otherwise>codeê°€ ${code} ì…ë‹ˆë‹¤</c:otherwise>
+</c:choose>
+
+<h2>core - forEach</h2>
+<%
+   RangersService rangersService = new RangersService();
+   request.setAttribute("rangersList", rangersService.getRangerVoAll());
+%>
+<h3>í–¥ìƒëœ forë¬¸</h3>
+<c:forEach items="${rangersList }" var="ranger">
+   ${ranger.name } / ${ranger.alias } / ${ranger.age } <br>
+</c:forEach>
+
+<h3>ì¼ë°˜ forë¬¸</h3>
+<%-- for(int i = 0; i <= 10; i++) 
+    for(int i = 10; i >= 0; i--) --%>
+<c:forEach begin="0" end="10" varStatus="status" step="3">
+   <span>test ${status.index }</span> <br>
+</c:forEach>
+
+<%--
+   for(int i = 0; i < rangersList.size(); i++)
+      Sytem.out.println(rangersList.get(i).name);
+--%>
+<c:forEach var="i" begin="0" end="${rangersList.size()-1 }">
+   ${rangersList.get(i).name } / ${rangersList.get(i).alias } / ${rangersList.get(i).age } <br>
+</c:forEach>
+
+<h2>core - forEach (map)</h2>
+<%
+   Map<String, String> map = new HashMap<String, String>();
+   map.put("ranger1", "brown");
+   map.put("ranger2", "cony");
+   map.put("ranger3", "sally");
+   pageContext.setAttribute("map", map);
+%>
+<c:forEach items="${map }" var="entry">
+   ${entry.key } / ${entry.value } <br>
+</c:forEach>
 </body>
 </html>

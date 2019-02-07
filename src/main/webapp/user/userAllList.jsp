@@ -1,4 +1,6 @@
-<%@page import="java.util.List"%>
+<%@ page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,8 +21,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/dashboard.css"
-	rel="stylesheet">
+<link href="${pageContext.servletContext.contextPath }/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,17 +49,19 @@
 							</tr>
 						</thead>
 						<tbody>
-							<% 	List<UserVo> userList = 
-										(List<UserVo>)request.getAttribute("userList");
-								for(UserVo vo : userList){ %>
-									<tr class="userTr" data-userid="<%=vo.getUserId() %>">
+						
+						<c:forEach items="${userList }" var="user" >
+							<tr class="userTr" data-userid="${user.userId }">
 										<td></td>	<!-- 생략 -->
-										<td><%=vo.getUserId() %></td><!-- userId -->
-										<td><%=vo.getUserNm() %></td><!-- userNm -->
+										<td>${user.getUserId() }</td> <!-- userId -->
+										<%-- <td>${user.getUserId() }</td><!-- userId --> --%>
+										
+										<td>${user.userNm }</td><!-- userNm -->
 										<td></td><!-- 생략 -->
-										<td><%=vo.getReg_dt_fmt() %></td><!-- reg_dt -->
+										<td><fmt:formatDate value="${user.reg_dt }" pattern="yyyy/MM/dd"/> </td> <!-- reg_dt -->
 									</tr>
-							<%} %>
+						</c:forEach>
+							
 						</tbody>
 					</table>
 				</div>
@@ -99,20 +102,24 @@
 				$("#frm").submit();
 			});
 		});
-	</script>	
+	</script>
+	
+<%-- <%
 
-<form id="frm" 
-	  action="<%=request.getContextPath() %>/user" method="get">
+	pageContext.getRequest().equals(request);
+	pageContext.getSession().equals(session);
+	
+	request.getContextPath();
+	((HttpServletRequest)pageContext.getRequest()).getContextPath();
+	
+	application.getContextPath();
+	
+%> --%>
+	
+
+<form id="frm" action="${pageContext.servletContext.contextPath }/user" method="get">
 	<input type="hidden" id="userId" name="userId"/>
 </form>
 
 </body>
 </html>
-
-
-
-
-
-
-
-

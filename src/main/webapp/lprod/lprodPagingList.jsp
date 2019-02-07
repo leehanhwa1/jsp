@@ -1,5 +1,6 @@
 <%@page import="kr.or.ddit.lprod.model.LprodVo"%>
 <%@page import="java.util.List"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -46,63 +47,67 @@
 							</tr>
 						</thead>
 						<tbody>
-							<% 	List<LprodVo> lprodList = 
-										(List<LprodVo>)request.getAttribute("lprodList");
-								for(LprodVo vo : lprodList){ %>
-									<tr class="lprodTr" data-lgu="<%=vo.getLprod_gu() %>">
-										<td><%=vo.getLprod_id() %></td>
-										<td><%=vo.getLprod_gu() %></td>
-										<td><%=vo.getLprod_nm() %></td>	
-									</tr>
-							<%} %>
+						
+						<c:forEach items="${lprodList }" var="lprod">
+							<tr class="lprodTr" data-lprodid=${lprod.lprod_id }>
+							
+								<!-- 생략 -->
+								<td>${lprod.lprod_id }</td>
+								<td>${lprod.lprod_gu }</td>
+								<td>${lprod.lprod_nm }</td>
+								
+							</tr>
+							
+						</c:forEach>
+						
 						</tbody>
 					</table>
 					
-					<%
-						int totalCnt = (Integer)request.getAttribute("totalCnt");
-						int pageSize = (Integer)request.getAttribute("pageSize");
-						int cpage = (Integer)request.getAttribute("page");
-						int lastPage = totalCnt/pageSize + (totalCnt%pageSize > 0 ? 1 : 0);
-						String cp = request.getContextPath();
-					%>
-
+					<c:set var="lastPage" value="${Integer(totalCnt/pageSize + (totalCnt%pageSize > 0 ? 1 : 0)) }" />
+					
 					<nav style="text-align:center;">
 						<ul class="pagination">
-							<%if(cpage == 1){%>
-								<li class="disabled">
-									<a aria-label="Previous">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-							<%}else{%>
-								<li>
-									<a href="<%=cp%>/lprodPagingList" aria-label="Previous">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-							<%} %>
+							<c:choose>
+								<c:when test="${page == 1 }">
+									<li class="disabled">
+										<a aria-label="Previous">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+								</c:when>
+							</c:choose>
 							
-							<%
-							for(int i = 1; i <= lastPage; i++){%>
-								<li
-									<%if(i == cpage){ %>
-										class="active"
-									<%} %>	
-								><a href="<%=cp%>/lprodPagingList?page=<%=i%>"><%=i%></a></li>
-							<%}%>
-					
-							<%if(cpage == lastPage){%>					
-								<li class="disabled"><a ria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a></li>
-							<%}else{ %>
-								<li><a href="<%=cp%>/userPagingList?page=<%=lastPage%>" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a></li>
-							<%}%>
+							<c:forEach begin="1" end="${lastPage }" var="i">
+								<c:set var="active" value="" />
+							<c:if test="${i == page }">
+								<c:set var="active" value="active" />
+							</c:if>
+							
+								<li class="${active }">
+									<a href= "${pageContext.servletContext.contextPath }/lprodPagingList?page=${i}">${i }</a>
+								</li>
+							</c:forEach>
+							
+							<c:choose>
+								<c:when test="${page == lastPage }">
+									<li class="disabled">
+										<a aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li>
+										<a href="${pageContext.servletContext.contextPath }/lprodPagingList?page=${ lastPage }" aria-label="Next">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+									
+								</c:otherwise>
+							
+							</c:choose>
 						</ul>
 					</nav>
-					
 				</div>
 			</div>
 		</div>

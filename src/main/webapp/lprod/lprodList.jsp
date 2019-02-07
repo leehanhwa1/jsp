@@ -1,5 +1,6 @@
 <%@page import="kr.or.ddit.lprod.model.LprodVo"%>
 <%@page import="java.util.List"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/dashboard.css"
+<link href="${pageContext.servletContext.contextPath }/css/dashboard.css"
 	rel="stylesheet">
 </head>
 
@@ -42,23 +43,24 @@
 							<tr>
 								<th>카테고리 아이디</th>
 								<th>카테고리</th>
-								<th>카테고리명</th>								
+								<th>카테고리명</th>
 							</tr>
 						</thead>
 						<tbody>
-							<% 	List<LprodVo> lprodList = 
-										(List<LprodVo>)request.getAttribute("lprodList");
-								for(LprodVo vo : lprodList){ %>
-									<tr class="lprodTr" data-lgu="<%=vo.getLprod_gu() %>">
-										<td><%=vo.getLprod_id() %></td>
-										<td><%=vo.getLprod_gu() %></td>
-										<td><%=vo.getLprod_nm() %></td>	
-									</tr>
-							<%} %>
+						
+						<c:forEach items="${lprodList }" var="lprod">
+							<tr class=lprodTr data-lprodid=${lprod.lprod_id }>
+								
+								<!-- 생략 -->
+								<td>${lprod.lprod_id }</td>
+								<td>${lprod.lprod_gu }</td>
+								<td>${lprod.lprod_nm }</td>
+								
+							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 				</div>
-
 			</div>
 		</div>
 	</div>
