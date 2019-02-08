@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/selectLang")
-public class selectLang extends HttpServlet {
+public class selectLangServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
