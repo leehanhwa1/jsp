@@ -18,13 +18,9 @@ public class UserDaoImpl implements IUserDao{
 	 * @return
 	 * Method 설명 : 전체 사용자 조회
 	 */
-	public List<UserVo> getAllUser(){
-		SqlSessionFactory sqlSessionFactory = 
-				MybatisSqlSessionFactory.getSqlSessionFactory();
+	public List<UserVo> getAllUser(SqlSession sqlSession){
 		
-		SqlSession sqlSession =sqlSessionFactory.openSession();
 		List<UserVo> userList = sqlSession.selectList("user.getAllUser");
-		sqlSession.close();
 		
 		return userList;
 	}
@@ -38,13 +34,9 @@ public class UserDaoImpl implements IUserDao{
 	 * Method 설명 : 사용자 조회
 	 */
 	@Override
-	public UserVo selectUser(String userId) {
-		SqlSessionFactory sqlSessionFactory = 
-				MybatisSqlSessionFactory.getSqlSessionFactory();
+	public UserVo selectUser(SqlSession sqlSession, String userId) {
 		
-		SqlSession sqlSession =sqlSessionFactory.openSession();
 		UserVo userVo = sqlSession.selectOne("user.selectUser", userId);
-		sqlSession.close();
 		
 		return userVo;
 	}
@@ -58,13 +50,9 @@ public class UserDaoImpl implements IUserDao{
 	 * Method 설명 : 사용자 페이징 리스트 조회
 	 */
 	@Override
-	public List<UserVo> selectUserPagingList(PageVo pageVo) {
-		SqlSessionFactory sqlSessionFactory = 
-				MybatisSqlSessionFactory.getSqlSessionFactory();
+	public List<UserVo> selectUserPagingList(SqlSession sqlSession, PageVo pageVo) {
 		
-		SqlSession sqlSession =sqlSessionFactory.openSession();
 		List<UserVo> userList = sqlSession.selectList("user.selectUserPagingList", pageVo);
-		sqlSession.close();
 		
 		return userList;
 	}
@@ -77,14 +65,61 @@ public class UserDaoImpl implements IUserDao{
 	 * Method 설명 : 전체 사용자 수를 조회
 	 */
 	@Override
-	public int getUserCnt() {
-		SqlSessionFactory sqlSessionFactory =
-				MybatisSqlSessionFactory.getSqlSessionFactory();
-		SqlSession sqlSession = sqlSessionFactory.openSession();
+	public int getUserCnt(SqlSession sqlSession) {
+		
 		int userCnt = sqlSession.selectOne("user.getUserCnt");
-		sqlSession.close();
 		
 		return userCnt;
+	}
+
+	/**
+	* Method : insertUser
+	* 작성자 : PC09
+	* 변경이력 :
+	* @param userVo
+	* @return
+	* Method 설명 : 사용자 등록
+	*/
+	@Override
+	public int insertUser(SqlSession sqlSession, UserVo userVo) {
+		
+		int insertCnt = sqlSession.insert("user.insertUser", userVo);
+		
+		return insertCnt;
+	}
+
+	/**
+	* Method : deleteUser
+	* 작성자 : PC09
+	* 변경이력 :
+	* @param userId
+	* @return
+	* Method 설명 : 사옹자 삭제
+	*/
+	@Override
+	public int deleteUser(SqlSession sqlSession, String userId) {
+		
+		int deleteCnt = sqlSession.delete("user.deleteUser", userId);
+		
+		return deleteCnt;
+	}
+
+	
+	
+	/**
+	* Method : updateUser
+	* 작성자 : PC09
+	* 변경이력 :
+	* @param sqlSession
+	* @param userId
+	* @return
+	* Method 설명 : 사용자 수정
+	*/
+	@Override
+	public int updateUser(SqlSession sqlSession, UserVo uservo) {
+		
+		int updateCnt = sqlSession.update("user.updateUser", uservo);
+		return updateCnt;
 	}
 }
 

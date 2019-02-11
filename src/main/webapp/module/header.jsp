@@ -26,7 +26,7 @@
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Help</a></li>
 			</ul>
-			<form class="navbar-form navbar-right">
+			<form id="searchfrm" class="navbar-form navbar-right">
 				<input type="text" class="form-control" placeholder="Search...">
 			</form>
 		</div>

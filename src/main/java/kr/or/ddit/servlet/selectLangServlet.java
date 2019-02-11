@@ -13,17 +13,17 @@ public class selectLangServlet extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	// localhost/jstl/selectLang.jsp -> lang 파라미터 존재 X
+	// form(button -> select)		 -> lang 파리미터 존재
 
 	String lang = request.getParameter("lang");
 	lang = lang == null ? "ko" : lang;
+	
 	request.setAttribute("lang", lang);
 		
 	request.getRequestDispatcher("/jstl/selectLangWS.jsp").forward(request, response);
 		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

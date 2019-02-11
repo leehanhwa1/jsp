@@ -69,6 +69,11 @@
 						</tbody>
 					</table>
 					
+					<form action="${pageContext.request.contextPath }/userForm" method="get">
+					<button type="submit" class="btn btn-default">사용자 등록</button>
+					</form>
+
+
 					<c:set var="lastPage" value="${Integer(userCnt/pageSize + (userCnt%pageSize > 0 ? 1 : 0)) }" />
 					
 					<nav style="text-align:center;">
@@ -142,6 +147,12 @@
 		//문서로딩이 완료된 이후 이벤트 등록
 		$(document).ready(function() {
 			console.log("document ready");
+			
+			// msg 속성이 존재하면 alert, 존재하지 않으면 넘어가기
+			<c:if test="${msg != null }">
+				alert("${msg }");
+				<%session.removeAttribute("msg"); %>
+			</c:if>
 
 			//사용자 tr 태그 클릭시 이벤트 핸들러
 			$(".userTr").on("click", function() {

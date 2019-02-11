@@ -16,7 +16,7 @@
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">	
 
 <!-- Custom styles for this template -->
 <link href="<%=request.getContextPath()%>/css/dashboard.css"
@@ -36,7 +36,7 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">사용자 정보조회</h1>
 				
-				<form class="form-horizontal" role="form">
+				<form id="frm" action="${pageContext.request.contextPath }/userModifyForm" method="get" class="form-horizontal" role="form">
 					
 					<% UserVo user = (UserVo)request.getAttribute("userVo"); %>
 					
@@ -56,7 +56,7 @@
 					<div class="form-group">
 						<label for="userNm" class="col-sm-2 control-label">별명</label>
 						<div class="col-sm-10">
-							<label class="control-label">미구현</label>
+							<label class="control-label"><%=user.getAlias() %></label>
 						</div>
 					</div>
 					
@@ -75,12 +75,14 @@
 						</div>
 					</div>
 					
-
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default">사용자 수정</button>
-						</div>
+					<div>
+						<form action="${pageContext.request.contextPath }/userModifyForm" method="get">
+						<input type="hidden" class="form-control" id="userId" name="userId" value="<%=user.getUserId() %>" placeholder="사용자 아이디" />
+							<button id="updBtn" type="button" class="btn btn-default">사용자 수정</button>
+						</form>
 					</div>
+				
+				
 				</form>
 					
 
@@ -95,6 +97,14 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+	
+	<script>
+	$("#updBtn").on("click", function() {
+            $("#frm").submit(); 
+		
+	});
+	
+	
+	</script>
 </body>
 </html>

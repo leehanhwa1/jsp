@@ -13,6 +13,8 @@ import kr.or.ddit.util.model.PageVo;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.sun.scenario.effect.impl.sw.sse.SSERendererDelegate;
+
 public class UserServiceImplTest {
 
 	private IUserService userService;
@@ -20,6 +22,7 @@ public class UserServiceImplTest {
 	@Before
 	public void setup(){
 		userService = new UserServiceImpl();
+		userService.deleteUser("test");
 	}
 	
 	/**
@@ -39,7 +42,7 @@ public class UserServiceImplTest {
 
 		/***Then***/
 		assertNotNull(userList);
-		assertEquals(105, userList.size());
+		assertEquals(106, userList.size());
 	}
 	
 	/**
@@ -89,8 +92,55 @@ public class UserServiceImplTest {
 		assertEquals(10, userList.size());
 		
 		//userCnt
-		assertEquals(105, userCnt);
+		assertEquals(106, userCnt);
 	}
+	
+	
+	@Test
+	public void testInsertUser() {
+		/***Given***/
+		UserVo uservo = new UserVo();
+		uservo.setUserId("glass");
+		uservo.setUserNm("테스트");
+		uservo.setAlias("곰");
+		uservo.setAddr1("대전 중구 중앙로 76");
+		uservo.setAddr2("2층 ddit");
+		uservo.setZipcode("39462");
+		uservo.setPass("testpass");
+		
+		
+		
+		/***When***/
+		int insertCount = userService.insertUser(uservo);
+		
+		/***Then***/
+		assertEquals(1, insertCount);
+		
+		
+	}
+	
+	
+	@Test
+	public void testUpdateUser() {
+		/***Given***/
+		UserVo uservo = new UserVo();
+		String userId = "moon";
+		uservo.setAlias("123");
+		uservo.setAddr1("서울특별시");
+		uservo.setAddr2("강남구");
+		uservo.setUserNm("안경");
+		uservo.setZipcode("11111");
+		uservo.setPass("qwerty");
+		
+		/***When***/
+		int updateCount = userService.updateUser(userId);
+		
+		/***Then***/
+		assertEquals(1, updateCount);
+	
+
+	}
+	
 
 }
 

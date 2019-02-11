@@ -44,7 +44,7 @@ selectLangWS.jsp
 		
 		// select box selected 적용
 		$("#langSelect > option").attr("selected", false);
-		$("#langSelect > option[value=${lang}]").attr("selected", true);
+		$("#langSelect > option[value=${lang }]").attr("selected", true);
 		
 		$("#langSelect").on("change", function() {
 			$("#frm").submit();

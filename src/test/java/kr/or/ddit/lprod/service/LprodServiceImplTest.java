@@ -49,7 +49,7 @@ public class LprodServiceImplTest {
 
 		/***Then***/
 		assertEquals(5, lprodList.size());
-		assertEquals(19, totalCnt);
+		assertEquals(20, totalCnt);
 
 	}
 

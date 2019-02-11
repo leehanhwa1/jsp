@@ -33,12 +33,32 @@
 		select count(*)
  		  from users
 	</select>	
+	
+	<!-- 사용자 입력 -->
+	<insert id="insertUser" parameterType="userVo">
+		insert into users
+			(userid, userNm, alias, addr1, addr2, zipcode, pass, reg_dt)
+		values
+			(#{userId}, #{userNm}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{pass}, sysdate)
+	</insert>
+	
+	<!-- 사용자 삭제 -->
+	<delete id="deleteUser" parameterType="String">
+		delete
+			from
+				users
+			where
+		userid=#{userId }
+	</delete>
+	
+	<!-- 사용자 수정 -->
+	<update id="updateUser" parameterType="String">
+		update
+			users
+		set
+			userNm=#{userNm}, pass=#{pass}, alias=#{alias}, addr1=#{addr1}, addr2=#{addr2}, zipcode=#{zipcode}
+		where
+			userid=#{userId}
+	</update>
+	
 </mapper>
-
-
-
-
-
-
-
-

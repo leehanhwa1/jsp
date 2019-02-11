@@ -62,7 +62,7 @@ public class LprodDaoImplTest {
 		int totalCnt = lprodDao.getLprodCnt();
 
 		/***Then***/
-		assertEquals(19, totalCnt);
+		assertEquals(20, totalCnt);
 	}
 
 }
