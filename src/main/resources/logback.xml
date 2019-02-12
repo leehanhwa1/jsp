@@ -8,7 +8,7 @@
 		</layout>
 	</appender>
 
-	<logger name="org.springframework" level="DEBUG"/>
+	<logger name="kr.or.ddit" level="info"/>
 	
     
 	<root level="DEBUG">
