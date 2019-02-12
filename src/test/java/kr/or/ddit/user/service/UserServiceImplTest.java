@@ -124,7 +124,7 @@ public class UserServiceImplTest {
 	public void testUpdateUser() {
 		/***Given***/
 		UserVo uservo = new UserVo();
-		String userId = "moon";
+		uservo.setUserId("moon");
 		uservo.setAlias("123");
 		uservo.setAddr1("서울특별시");
 		uservo.setAddr2("강남구");
@@ -133,7 +133,7 @@ public class UserServiceImplTest {
 		uservo.setPass("qwerty");
 		
 		/***When***/
-		int updateCount = userService.updateUser(userId);
+		int updateCount = userService.updateUser(uservo);
 		
 		/***Then***/
 		assertEquals(1, updateCount);

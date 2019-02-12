@@ -173,7 +173,7 @@ public class UserDaoImplTest {
 		
 		/***Given***/
 		UserVo uservo = new UserVo();
-		String userId = "moon";
+		uservo.setUserId("moon");
 		uservo.setAlias("123");
 		uservo.setAddr1("서울특별시");
 		uservo.setAddr2("강남구");
@@ -182,7 +182,7 @@ public class UserDaoImplTest {
 		uservo.setPass("qwerty");
 		
 		/***When***/
-		int updateCount = userDao.updateUser(sqlSession, userId);
+		int updateCount = userDao.updateUser(sqlSession, uservo);
 		
 		/***Then***/
 		assertEquals(1, updateCount);

@@ -10,8 +10,9 @@ public class UserVo {
 	}
 	
 	public UserVo(String userId, String userNm, String alias, String addr1,
-			String addr2, String zipcode, String pass) {
-		super();
+			String addr2, String zipcode, String pass, Date reg_dt,
+			String filename, String realfilename) {
+		
 		this.userId = userId;
 		this.userNm = userNm;
 		this.alias = alias;
@@ -19,7 +20,11 @@ public class UserVo {
 		this.addr2 = addr2;
 		this.zipcode = zipcode;
 		this.pass = pass;
+		this.reg_dt = reg_dt;
+		this.filename = filename;
+		this.realfilename = realfilename;
 	}
+
 	
 	private String	userId;		// 사용자 아이디
 	private String	userNm;		// 사용자 이름
@@ -29,9 +34,27 @@ public class UserVo {
 	private String  zipcode;	// 우편번호
 	private String	pass;		// 사용자 비밀번호
 	private Date	reg_dt;		// 등록일시
+	private String filename;
+	private String realfilename;
 	
 	
-	 //reg_dt 값을 yyyy/mm/dd 포맷팅
+	 public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getRealfilename() {
+		return realfilename;
+	}
+
+	public void setRealfilename(String realfilename) {
+		this.realfilename = realfilename;
+	}
+
+	//reg_dt 값을 yyyy/mm/dd 포맷팅
 	   public String getReg_dt_fmt() {
 	      SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
 	      return sdf.format(reg_dt);
@@ -85,13 +108,16 @@ public class UserVo {
 	public void setReg_dt(Date reg_dt) {
 		this.reg_dt = reg_dt;
 	}		// 등록일
+
 	@Override
 	public String toString() {
 		return "UserVo [userId=" + userId + ", userNm=" + userNm + ", alias="
 				+ alias + ", addr1=" + addr1 + ", addr2=" + addr2
 				+ ", zipcode=" + zipcode + ", pass=" + pass + ", reg_dt="
-				+ reg_dt + "]";
+				+ reg_dt + ", filename=" + filename + ", realfilename="
+				+ realfilename + "]";
 	}
+	
 	
 	
 }

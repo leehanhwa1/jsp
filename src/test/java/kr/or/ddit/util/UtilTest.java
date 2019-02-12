@@ -28,6 +28,27 @@ public class UtilTest {
 		assertEquals("brown", cookieValue2);
 		assertEquals("value", cookieValue3);
 	}
+	
+	
+	/**
+	* Method : testGetFileNameFromPart
+	* 작성자 : PC09
+	* 변경이력 :
+	* Method 설명 : part의 Content-Disposition 헤더로부터 filename을 가져온다.
+	*/
+	@Test
+	public void testGetFileNameFromPart() {
+		/***Given***/
+		String contentDisposition = "form-data; name=\"uploadFile\"; filename=\"cony.png\"";
+		// form-data; name="uploadFile"; filename="cony.png"
+		
+		/***When***/
+		String fileName = PartUtil.getFileNameFromPart(contentDisposition);
+
+		/***Then***/
+		assertEquals("cony.png", fileName);
+
+	}
 
 }
 
