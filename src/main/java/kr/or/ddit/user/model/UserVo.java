@@ -10,8 +10,7 @@ public class UserVo {
 	}
 	
 	public UserVo(String userId, String userNm, String alias, String addr1,
-			String addr2, String zipcode, String pass, Date reg_dt,
-			String filename, String realfilename) {
+			String addr2, String zipcode, String pass) {
 		
 		this.userId = userId;
 		this.userNm = userNm;
@@ -20,9 +19,6 @@ public class UserVo {
 		this.addr2 = addr2;
 		this.zipcode = zipcode;
 		this.pass = pass;
-		this.reg_dt = reg_dt;
-		this.filename = filename;
-		this.realfilename = realfilename;
 	}
 
 	

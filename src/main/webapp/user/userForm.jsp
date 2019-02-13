@@ -33,12 +33,21 @@
          </div>
          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">사용자 정보 조회</h1>
-            <form id="frm" action="${pageContext.request.contextPath }/userForm" method="post" class="form-horizontal" role="form">
+            <form id="frm" action="${pageContext.request.contextPath }/userForm" method="post" class="form-horizontal" role="form"
+            enctype="multipart/form-data">
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
                   <div class="col-sm-10">
                      <input type="text" class="form-control" id="userId" name="userId"
                         placeholder="사용자 아이디" />
+                  </div>
+               </div>
+               
+               <div class="form-group">
+                  <label for="userNm" class="col-sm-2 control-label">사진</label>
+                  <div class="col-sm-10">
+                     <input type="file" class="form-control" id="profile" name="profile"
+                        placeholder="사진" />
                   </div>
                </div>
 
@@ -114,13 +123,13 @@
    <script>
       function initData() {
          <%-- $("userId").val("<%=request.getParameter("userId") %>"); --%>
-         $("#userId").val("${param.userId}");
-         $("#userNm").val("${param.userNm}");
-         $("#alias").val("${param.alias}");
-         $("#addr1").val("${param.addr1}");
-         $("#addr2").val("${param.addr2}");
-         $("#zipcode").val("${param.zipcode}");
-         $("#pass").val("${param.pass}");
+         /* $("#userId").val("browjd"); */
+         $("#userNm").val("CONSOLE");
+         $("#alias").val("console");
+         $("#addr1").val("대전광역시 유성구 상대로 40");
+         $("#addr2").val("1901호");
+         $("#zipcode").val("33333");
+         $("#pass").val("1234");
       }
       function clearData() {
          $("#userId").val("");

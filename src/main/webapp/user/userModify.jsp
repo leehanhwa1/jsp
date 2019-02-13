@@ -33,12 +33,22 @@
          </div>
          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">사용자 정보 조회</h1>
-            <form id="frm" action="${pageContext.request.contextPath }/userModifyForm" method="post" class="form-horizontal" role="form">
+            <form id="frm" action="${pageContext.request.contextPath }/userModifyForm" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
                   <div class="col-sm-10">
                      <input type="text" class="form-control" id="userId" name="userId"
-                        placeholder="사용자 아이디" />
+                        placeholder="사용자 아이디" readonly />
+                  </div>
+               </div>
+               
+               <div class="form-group">
+                  <label for="userNm" class="col-sm-2 control-label">사진</label>
+                  <div class="col-sm-10">
+                  	<img id="img" src="" />
+                     <input type="file" class="form-control" id="profile" name="profile"
+                        placeholder="사진" />
                   </div>
                </div>
 
@@ -107,11 +117,14 @@
 
 
 <!-- Bootstrap core JavaScript
-    ================================================== -->
+    ========================================== -->
    <!-- Placed at the end of the document so the pages load faster -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-   <script >
+    <!-- 다음 주소 api -->
+   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+   
+   <script>
    	function initData() {
    		<%-- $("userId").val("<%=request.getParameter("userId") %>"); --%>
         $("#userId").val("${userVo.userId}");
@@ -121,7 +134,24 @@
         $("#addr2").val("${userVo.addr2}");
         $("#zipcode").val("${userVo.zipcode}");
         $("#pass").val("${userVo.pass}");
+        $("#img").attr("src", "${pageContext.request.contextPath}/profileImg?userId=${userVo.userId}");
    	}
+   	
+	  	//우편번호 검색 버튼 클릭 이벤트
+	    $("#zipcodeBtn").on("click", function() {
+	       new daum.Postcode({
+	          oncomplete : function(data) {
+	             // 새 우편번호 : data.zonecode
+	             $("#zipcode").val(data.zonecode);
+	
+	             // 기본주소(도로주소) : data.roadAddress
+	             $("#addr1").val(data.roadAddress);
+	
+	             // 상세주소 input focus
+	             $("#addr2").focus();
+	          }
+	       }).open();
+	    });	
    	
    	$(document).ready(function() {
    		initData();

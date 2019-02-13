@@ -37,9 +37,9 @@
 	<!-- 사용자 입력 -->
 	<insert id="insertUser" parameterType="userVo">
 		insert into users
-			(userid, userNm, alias, addr1, addr2, zipcode, pass, reg_dt)
+			(userid, userNm, alias, addr1, addr2, zipcode, pass, reg_dt, filename, realFilename)
 		values
-			(#{userId}, #{userNm}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{pass}, sysdate)
+			(#{userId}, #{userNm}, #{alias}, #{addr1}, #{addr2}, #{zipcode}, #{pass}, sysdate, #{filename}, #{realfilename} )
 	</insert>
 	
 	<!-- 사용자 삭제 -->
@@ -56,7 +56,8 @@
 		update
 			users
 		set
-			userNm=#{userNm}, pass=#{pass}, alias=#{alias}, addr1=#{addr1}, addr2=#{addr2}, zipcode=#{zipcode}
+			userNm=#{userNm}, pass=#{pass}, alias=#{alias}, addr1=#{addr1}, addr2=#{addr2}, zipcode=#{zipcode},
+			filename=#{filename}, realfilename=#{realfilename}
 		where
 			userid=#{userId}
 	</update>

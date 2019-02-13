@@ -1,18 +1,23 @@
 package kr.or.ddit.user.controller;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.service.IUserService;
 import kr.or.ddit.user.service.UserServiceImpl;
+import kr.or.ddit.util.PartUtil;
 
 @WebServlet("/userModifyForm")
+@MultipartConfig(maxFileSize=5*1024*1024 , maxRequestSize=5*5*1024*1024)
 public class UserModifyFormController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -65,8 +70,41 @@ public class UserModifyFormController extends HttpServlet {
 		String zipcode = req.getParameter("zipcode");
 		String pass = req.getParameter("pass");
 		String alias = req.getParameter("alias");
-		
 		UserVo uservo = new UserVo(userId, userNm, alias, addr1, addr2, zipcode, pass);
+		
+		// 사용자 사진
+        Part profilepart = req.getPart("profile");
+        
+        
+        // 사용자가 사진을 올린 경우
+        String filename 	 = "";
+   	 	String realFilename  = "";
+   	 	
+   	 if(profilepart.getSize() > 0) {
+    	 // 사용자 테이블의 파일명을 저장(실제 업로드한 파일명 - filename, 파일 충돌을 방지하기 위해 사용한 uuid값 - realfilename)
+    	 String contentDisposition = profilepart.getHeader("Content-Disposition");
+    	 
+    	 filename 	  = PartUtil.getFileNameFromPart(contentDisposition);
+    	 realFilename = "d:\\picture\\" + UUID.randomUUID().toString();
+    	 
+    	 // 디스크에 기록 (d:\picture\ + realFilename)
+    	 profilepart.write(realFilename);
+    	 
+    	 
+    	 
+     } else {
+    	 UserVo temp = userService.selectUser(userId);
+    	 
+    	 temp.getFilename();
+    	 temp.getRealfilename();
+     }
+    	 
+    	 // 사용자가 사진을 추가하지 않은 경우
+    	 uservo.setFilename(filename);
+    	 uservo.setRealfilename(realFilename);
+   	 
+		
+     
 		
 		int cnt = userService.updateUser(uservo);
 		
