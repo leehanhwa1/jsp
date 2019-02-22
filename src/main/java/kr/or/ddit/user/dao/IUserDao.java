@@ -82,6 +82,11 @@ public interface IUserDao {
 	* Method 설명 : 사용자 수정
 	*/
 	int updateUser(SqlSession sqlSession, UserVo uservo);
+	
+	
+	
+	
+	int encryptPass(SqlSession sqlSession, UserVo uservo);
 }
 
 

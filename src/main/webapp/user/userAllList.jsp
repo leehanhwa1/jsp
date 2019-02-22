@@ -21,7 +21,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
-<link href="${pageContext.servletContext.contextPath }/css/dashboard.css" rel="stylesheet">
+<link href="${cp }/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
@@ -52,14 +52,14 @@
 						
 						<c:forEach items="${userList }" var="user" >
 							<tr class="userTr" data-userid="${user.userId }">
-										<td></td>	<!-- 생략 -->
-										<td>${user.getUserId() }</td> <!-- userId -->
-										<%-- <td>${user.getUserId() }</td><!-- userId --> --%>
-										
-										<td>${user.userNm }</td><!-- userNm -->
-										<td></td><!-- 생략 -->
-										<td><fmt:formatDate value="${user.reg_dt }" pattern="yyyy/MM/dd"/> </td> <!-- reg_dt -->
-									</tr>
+								<td></td>	<!-- 생략 -->
+								<td>${user.getUserId() }</td> <!-- userId -->
+								<%-- <td>${user.getUserId() }</td><!-- userId --> --%>
+								
+								<td>${user.userNm }</td><!-- userNm -->
+								<td></td><!-- 생략 -->
+								<td><fmt:formatDate value="${user.reg_dt }" pattern="yyyy/MM/dd"/> </td> <!-- reg_dt -->
+							</tr>
 						</c:forEach>
 							
 						</tbody>
@@ -117,7 +117,7 @@
 %> --%>
 	
 
-<form id="frm" action="${pageContext.servletContext.contextPath }/user" method="get">
+<form id="frm" action="${cp }/user" method="get">
 	<input type="hidden" id="userId" name="userId"/>
 </form>
 

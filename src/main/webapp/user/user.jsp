@@ -21,7 +21,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">	
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/dashboard.css"
+<link href="${cp}/css/dashboard.css"
 	rel="stylesheet">
 
 </head>
@@ -33,12 +33,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
-				<%@ include file="/module/left.jsp"%>
+				<%@ include file="/module/left.jsp"%>	
 			</div>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h1 class="page-header">사용자 정보조회</h1>
 				
-				<form id="frm" action="${pageContext.request.contextPath }/userModifyForm" method="get" class="form-horizontal" role="form">
+				<form id="frm" action="${cp }/userModifyForm" method="get" class="form-horizontal" role="form">
 					
 					<% UserVo user = (UserVo)request.getAttribute("userVo"); %>
 					
@@ -54,10 +54,10 @@
 						<div class="col-sm-9">
 							<%-- <c:set var="filename" scope="request"/> 
 							<c:choose>
-								<c:when test="${userVo.filename == null }"> <img src="${pageContext.request.contextPath }/upload/noimg.png"/> </c:when>
-								<c:when test="${userVo.filename != null }"> <img src="${pageContext.request.contextPath }/upload/${userVo.filename }"/> </c:when>
+								<c:when test="${userVo.filename == null }"> <img src="${cp }/upload/noimg.png"/> </c:when>
+								<c:when test="${userVo.filename != null }"> <img src="${cp }/upload/${userVo.filename }"/> </c:when>
 							</c:choose> --%>
-							<img src="${pageContext.request.contextPath }/profileImg?userId=${userVo.userId }">
+							<img src="${cp }/profileImg?userId=${userVo.userId }">
 						</div>
 					</div>
 
@@ -111,16 +111,13 @@
 					
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-9">
-						<form action="${pageContext.request.contextPath }/userModifyForm" method="get">
+						<form action="${cp }/userModifyForm" method="get">
 						<input type="hidden" class="form-control" id="userId" name="userId" value="${userVo.userId }" placeholder="사용자 아이디" />
 							<button id="updBtn" type="button" class="btn btn-default">사용자 수정</button>
 						</div>
 					</div>
 						</form>
 					</div>
-				
-				
-					
 
 			</div>
 		</div>

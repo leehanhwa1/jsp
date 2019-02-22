@@ -26,7 +26,7 @@ request.getRequestURI() <%=request.getRequestURI() %><br>
 request.getRequestURL() <%=request.getRequestURL() %><br>
 
 <%-- context path : web context --%>
-request.getContextPath() : <%=request.getContextPath() %> <br>
+request.getContextPath() : ${cp} <br>
 
 <%-- server name --%>
 request.getServerName() : <%=request.getServerName() %> <br>

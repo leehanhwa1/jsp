@@ -9,7 +9,7 @@
 <body>
 
 <h2>with unt_cd</h2>
-	<form action="${pageContext.request.contextPath }/wrapper" method="post">
+	<form action="${cp }/wrapper" method="post">
 		<input type="text" name="userId" value="brown" /><br>
 		<input type="text" name="unt_cd" value="line" /><br>
 		<input type="submit" value="전송" /><br>
@@ -17,7 +17,7 @@
 
 
 <h2>without unt_cd</h2>
-	<form action="${pageContext.request.contextPath }/wrapper" method="post">
+	<form action="${cp }/wrapper" method="post">
 		<input type="text" name="userId" value="brown" /><br>
 		<input type="submit" value="전송" /><br>
 	</form>

@@ -21,7 +21,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/dashboard.css"
+<link href="${cp}/css/dashboard.css"
 	rel="stylesheet">
 </head>
 
@@ -69,7 +69,7 @@
 						</tbody>
 					</table>
 					
-					<form action="${pageContext.request.contextPath }/userForm" method="get">
+					<form action="${cp }/userForm" method="get">
 					<button type="submit" class="btn btn-default">사용자 등록</button>
 					</form>
 
@@ -88,7 +88,7 @@
 								</c:when>
 								<c:otherwise>
 									<li>
-										<a href="${pageContext.servletContext.contextPath }/userPagingList" aria-label="Previous">
+										<a href="${cp }/userPagingList" aria-label="Previous">
 											<span aria-hidden="true">&laquo;</span>
 										</a>
 									</li>
@@ -102,7 +102,7 @@
 							</c:if>
 							
 								<li class="${active }">
-									<a href= "${pageContext.servletContext.contextPath }/userPagingList?page=${i}">${i}</a>
+									<a href= "${cp }/userPagingList?page=${i}">${i}</a>
 								</li>
 							</c:forEach>
 							
@@ -116,7 +116,7 @@
 								</c:when>
 								<c:otherwise>
 									<li>
-										<a href="${pageContext.servletContext.contextPath }/userPagingList?page=${lastPage}" aria-label="Next">
+										<a href="${cp }/userPagingList?page=${lastPage}" aria-label="Next">
 											<span aria-hidden="true">&raquo;</span>
 										</a>
 									</li>
@@ -175,7 +175,7 @@
 		});
 	</script>
 
-	<form id="frm" action="${pageContext.servletContext.contextPath }/user"
+	<form id="frm" action="${cp }/user"
 		method="get">
 		<input type="hidden" id="userId" name="userId" />
 	</form>

@@ -70,6 +70,9 @@ public interface IUserService {
 	* Method 설명 : 사용자 수정
 	*/
 	int updateUser(UserVo uservo);
+	
+	
+	int encryptPass();
 
 	
 	

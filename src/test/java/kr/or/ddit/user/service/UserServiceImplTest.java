@@ -1,19 +1,16 @@
 package kr.or.ddit.user.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 import java.util.Map;
 
-import kr.or.ddit.user.dao.IUserDao;
-import kr.or.ddit.user.dao.UserDaoImpl;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.util.model.PageVo;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.sun.scenario.effect.impl.sw.sse.SSERendererDelegate;
 
 public class UserServiceImplTest {
 
@@ -141,6 +138,16 @@ public class UserServiceImplTest {
 
 	}
 	
+	
+	@Test
+	public void testEncryptPass() {
+		/***Given***/
+		
+		/***When***/
+		userService.encryptPass();
+		/***Then***/
+
+	}
 
 }
 

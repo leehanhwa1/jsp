@@ -4,10 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.db.mybatis.MybatisSqlSessionFactory;
+import kr.or.ddit.encrypt.kisa.sha256.KISA_SHA256;
 import kr.or.ddit.user.dao.IUserDao;
 import kr.or.ddit.user.dao.UserDaoImpl;
 import kr.or.ddit.user.model.UserVo;
@@ -134,6 +139,35 @@ public int updateUser(UserVo uservo) {
 	    sqlSession.close();
 		return cnt;
 	}
+
+
+
+
+@Override
+public int encryptPass() {
+	SqlSessionFactory sqlSessionFactory = MybatisSqlSessionFactory.getSqlSessionFactory();
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    
+    String pass = null;
+    
+    List<UserVo> uservoList = userDao.getAllUser(sqlSession);
+    int cnt = 0;
+    for(int i=0; i<uservoList.size(); i++) {
+    	pass = uservoList.get(i).getPass();
+    	String password = KISA_SHA256.encrypt(pass);
+    	UserVo uservo = uservoList.get(i);
+    	uservo.setPass(password);
+    	cnt += userDao.encryptPass(sqlSession, uservo);
+    }
+    
+    
+    
+	
+    sqlSession.commit();
+    sqlSession.close();
+	
+	return cnt;
+}
 
    
 }

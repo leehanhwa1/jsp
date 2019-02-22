@@ -63,14 +63,14 @@ public class UserModifyFormController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		
-		String userId = req.getParameter("userId");
-		String userNm = req.getParameter("userNm");
-		String addr1 = req.getParameter("addr1");
-		String addr2 = req.getParameter("addr2");
+		String userId  = req.getParameter("userId");
+		String userNm  = req.getParameter("userNm");
+		String addr1   = req.getParameter("addr1");
+		String addr2   = req.getParameter("addr2");
 		String zipcode = req.getParameter("zipcode");
-		String pass = req.getParameter("pass");
-		String alias = req.getParameter("alias");
-		UserVo uservo = new UserVo(userId, userNm, alias, addr1, addr2, zipcode, pass);
+		String pass    = req.getParameter("pass");
+		String alias   = req.getParameter("alias");
+		UserVo uservo  = new UserVo(userId, userNm, alias, addr1, addr2, zipcode, pass);
 		
 		// 사용자 사진
         Part profilepart = req.getPart("profile");

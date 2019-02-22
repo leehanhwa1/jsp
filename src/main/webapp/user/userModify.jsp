@@ -18,7 +18,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/dashboard.css"
+<link href="${cp}/css/dashboard.css"
 	rel="stylesheet">
 	
 </head>
@@ -33,7 +33,7 @@
          </div>
          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">사용자 정보 조회</h1>
-            <form id="frm" action="${pageContext.request.contextPath }/userModifyForm" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+            <form id="frm" action="${cp }/userModifyForm" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
             
                <div class="form-group">
                   <label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
@@ -134,7 +134,7 @@
         $("#addr2").val("${userVo.addr2}");
         $("#zipcode").val("${userVo.zipcode}");
         $("#pass").val("${userVo.pass}");
-        $("#img").attr("src", "${pageContext.request.contextPath}/profileImg?userId=${userVo.userId}");
+        $("#img").attr("src", "${cp}/profileImg?userId=${userVo.userId}");
    	}
    	
 	  	//우편번호 검색 버튼 클릭 이벤트

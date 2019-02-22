@@ -62,4 +62,14 @@
 			userid=#{userId}
 	</update>
 	
+	<!-- 비밀번호 -->
+	<update id="encryptPass" parameterType="userVo">
+		update
+			users
+		set
+			pass=#{pass}
+		where
+			userid=#{userId}
+	</update>
+	
 </mapper>

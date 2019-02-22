@@ -21,7 +21,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%>/css/dashboard.css"
+<link href="${cp}/css/dashboard.css"
 	rel="stylesheet">
 </head>
 
@@ -101,7 +101,7 @@
 	</script>	
 
 <form id="frm" 
-	  action="<%=request.getContextPath() %>/user" method="get">
+	  action="${cp}/user" method="get">
 	<input type="hidden" id="userId" name="userId"/>
 </form>
 

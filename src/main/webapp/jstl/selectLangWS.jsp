@@ -20,7 +20,7 @@ selectLangWS.jsp
 
 
 
-<form id="frm" action="${pageContext.request.contextPath }/selectLang">
+<form id="frm" action="${cp }/selectLang">
 <select id="langSelect" name="lang">
 	<%-- <option value="ko" <c:if test="${lang == 'ko' }">selected</c:if> >한국어</option> --%>
 	<option value="ko" >한국어</option>

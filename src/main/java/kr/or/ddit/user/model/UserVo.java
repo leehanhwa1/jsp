@@ -3,7 +3,16 @@ package kr.or.ddit.user.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class UserVo {
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class UserVo implements HttpSessionBindingListener {
+	
+	private Logger logger = LoggerFactory.getLogger(UserVo.class);
 	
 	public UserVo() {
 		
@@ -113,6 +122,23 @@ public class UserVo {
 				+ reg_dt + ", filename=" + filename + ", realfilename="
 				+ realfilename + "]";
 	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		HttpSession session = event.getSession();
+		logger.debug("userVo valueBound : {}", session.getId());
+		
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent event) {
+		HttpSession session = event.getSession();
+		logger.debug("userVo valueUnbound : {}", session.getId());
+		
+	}
+	
+	
+	
 	
 	
 	
