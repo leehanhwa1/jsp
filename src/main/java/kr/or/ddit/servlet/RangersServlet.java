@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.connector.Request;
-
 import kr.or.ddit.rangers.model.RangerVo;
 import kr.or.ddit.rangers.service.RangersService;
 
