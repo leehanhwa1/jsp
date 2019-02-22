@@ -1,9 +1,9 @@
 package kr.or.ddit.rangers.model;
 
 public class RangerVo {
-	private String name;  // 이름(영문)
-	private String alias; // 별명(한글)
-	private int    age;	  // 나이
+	private String name; 
+	private String alias;
+	private int    age;	  
 	
 	public RangerVo() {
 		
