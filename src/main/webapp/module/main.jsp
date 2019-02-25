@@ -15,7 +15,7 @@
  
  <br>
  
- module/main.jsp <br>
+ module/main.jsp - 수정 <br>
 <%
 	//RequestDispatcher rd = request.getRequestDispatcher("/module/footer.jsp");
  	//rd.include(request, response);
